@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package TFLiteGrpc;
+
+service EdgeAI {
+
+  rpc UploadFile(stream FileContent) returns (RetStatus) {}
+
+  rpc CreateRunRequest(InputTensor) returns (OutputTensor) {}
+  
+}
+
+message RetStatus {
+  int32 id = 1;
+}
+
+message FileContent {
+  int32  id = 1;
+  string name = 2;
+  bytes  content = 3;
+}
+
+message InputTensor {
+  repeated float tensor = 1;
+}
+
+message OutputTensor {
+  repeated float tensor = 1;
+}
