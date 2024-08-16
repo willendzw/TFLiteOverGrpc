@@ -3,9 +3,14 @@ syntax = "proto3";
 package TFLiteGrpc;
 
 service EdgeAI {
-
+  /* The return status 0 for upload failed, others for the model index.
+  *  The client can use this index to run the model and don't need upload
+  *  it again.
+  */
   rpc UploadFile(stream FileContent) returns (RetStatus) {}
 
+  /*
+  */
   rpc CreateRunRequest(InputTensor) returns (OutputTensor) {}
   
 }
@@ -21,9 +26,11 @@ message FileContent {
 }
 
 message InputTensor {
-  repeated float tensor = 1;
+  int32 model_id = 1;
+  repeated float tensor = 2;
 }
 
 message OutputTensor {
-  repeated float tensor = 1;
+  int32 model_id = 1;
+  repeated float tensor = 2;
 }

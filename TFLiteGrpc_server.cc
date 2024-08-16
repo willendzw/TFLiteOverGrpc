@@ -35,16 +35,16 @@ private:
 public:
     EdgeAIServerImpl() = default;
 
-    Status UploadFile(
-      ServerContext* context, ServerReader<FileContent>* reader,
-      RetStatus* summary) override
+    Status UploadFile( ServerContext* context, ServerReader<FileContent>* reader, RetStatus* summary ) override
     {
         FileContent contentPart;
         SequentialFileWriter writer;
+
         while (reader->Read(&contentPart)) {
             try {
-               
-                writer.OpenIfNecessary(contentPart.name());
+                std::cout << "Receive " << contentPart.name() << std::endl;
+                std::string savedfile = "saved_" + contentPart.name();
+                writer.OpenIfNecessary(savedfile);
                 auto* const data = contentPart.mutable_content();
                 writer.Write(*data);
                 summary->set_id(contentPart.id());
@@ -59,10 +59,19 @@ public:
         return Status::OK;
     }
 
-    Status CreateRunRequest(::grpc::ServerContext* context, const ::TFLiteGrpc::InputTensor* request, ::TFLiteGrpc::OutputTensor* response) override 
+    Status CreateRunRequest(::grpc::ServerContext* context, const ::TFLiteGrpc::InputTensor* request,
+                            ::TFLiteGrpc::OutputTensor* response) override 
     {
+        if (request == nullptr || response == nullptr) {
+            std::cout << "The vector pointer is null." << std::endl;
+            return Status::OK;
+        }
 
-      return Status::OK;
+        for (size_t i = 0; i < request->tensor_size(); ++i) {
+            std::cout << "Element " << i << ": " << request->tensor(i) << std::endl;
+            response->add_tensor(3.14);
+        }
+        return Status::OK;
     }
 
 private:

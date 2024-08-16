@@ -19,7 +19,7 @@ GRPC_CPP_PLUGIN_PATH ?= `which $(GRPC_CPP_PLUGIN)`
 PROTOS_PATH = .
 PROJECT_NAME = TFLiteGrpc
 
-COMMON_OBJS = $(PROJECT_NAME).pb.o $(PROJECT_NAME).grpc.pb.o sequential_file_reader.o sequential_file_writer.o utils.o messages.o
+COMMON_OBJS = $(PROJECT_NAME).pb.o $(PROJECT_NAME).grpc.pb.o sequential_file_reader.o sequential_file_writer.o utils.o
 
 vpath %.proto $(PROTOS_PATH)
 
