@@ -6,7 +6,7 @@
 
 #include "sequential_file_reader.h"
 #include "utils.h"
-#include "TFLiteGrpc.grpc.pb.h"
+#include "tensorflow/lite/examples/TFLiteOverGrpc/TFLiteGrpc.grpc.pb.h"
 
 template <class StreamWriter>
 class FileReaderIntoStream : public SequentialFileReader {

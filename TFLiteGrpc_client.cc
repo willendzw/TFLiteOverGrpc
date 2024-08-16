@@ -10,7 +10,7 @@
 #include <sysexits.h>
 #include <chrono>
 
-#include <grpc/grpc.h>
+#include "grpcpp/grpcpp.h"
 #include <grpc++/channel.h>
 #include <grpc++/client_context.h>
 #include <grpc++/create_channel.h>

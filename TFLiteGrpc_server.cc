@@ -6,7 +6,7 @@
 #include <cstdint>
 #include <stdexcept>
 
-#include <grpc/grpc.h>
+#include "grpcpp/grpcpp.h"
 #include <grpc++/server.h>
 #include <grpc++/server_builder.h>
 #include <grpc++/server_context.h>
